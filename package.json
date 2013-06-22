@@ -1,0 +1,29 @@
+{
+  "name": "validatormator",
+  "version": "0.0.1",
+  "description": "A collection of validators for Node-ORM2",
+  "homepage": "http://thecodeabode.blogspot.com",
+  "author": {
+    "name": "Ben Kitzelman",
+    "email": "benkitzelman@hotmail.com",
+    "url": "http://thecodeabode.blogspot.com"
+  },
+  "main": "index.coffee",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/benkitzelman/validatormator.git"
+  },
+  "dependencies": {
+    "coffee-script": "*",
+    "orm": "~2.0.13"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "async": "*",
+    "should": "*",
+    "sqlite3": "2.1.7"
+  }
+}
