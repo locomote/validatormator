@@ -1,2 +1,2 @@
 module.exports = 
-  url: require './src/url'
+  pattern: require './src/pattern'
