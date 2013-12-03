@@ -15,3 +15,6 @@ License
 =======
 
 ...free to do what you want any other time...
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/benkitzelman/validatormator/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
