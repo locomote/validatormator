@@ -13,22 +13,28 @@ module.exports = v =
       return cb(msg) unless v.emailSync(email)
       cb()
 
-  urlSync: (url) ->
+  urlSync: (url, opts = {}) ->
+    privateAndLocalNetworks = ->
+      return '' if opts.allowPrivateNetworks
+      # IP address exclusion
+      # private & local networks
+      "(?!10(?:\\.\\d{1,3}){3})" +
+      "(?!127(?:\\.\\d{1,3}){3})" +
+      "(?!169\\.254(?:\\.\\d{1,3}){2})" +
+      "(?!192\\.168(?:\\.\\d{1,3}){2})" +
+      "(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})"
+
     # https://gist.github.com/dperini/729294
-    regex = new RegExp(
+    regexStr =
       "^" +
         # protocol identifier
         "(?:(?:https?|ftp)://)" +
         # user:pass authentication
         "(?:\\S+(?::\\S*)?@)?" +
         "(?:" +
-          # IP address exclusion
-          # private & local networks
-          "(?!10(?:\\.\\d{1,3}){3})" +
-          "(?!127(?:\\.\\d{1,3}){3})" +
-          "(?!169\\.254(?:\\.\\d{1,3}){2})" +
-          "(?!192\\.168(?:\\.\\d{1,3}){2})" +
-          "(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})" +
+
+          privateAndLocalNetworks() +
+
           # IP address dotted notation octets
           # excludes loopback network 0.0.0.0
           # excludes reserved space >= 224.0.0.0
@@ -49,11 +55,11 @@ module.exports = v =
         "(?::\\d{2,5})?" +
         # resource path
         "(?:/[^\\s]*)?" +
-      "$", "i"
-    )
-    match regex, url
+      "$"
 
-  url: (msg = "Invalid Url specified") ->
+    match new RegExp(regexStr, "i"), url
+
+  url: (msg = "Invalid Url specified", opts) ->
     (url, cb) ->
-      return cb(msg) unless v.urlSync(url)
+      return cb(msg) unless v.urlSync(url, opts)
       cb()
