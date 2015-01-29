@@ -3,7 +3,7 @@ helper = require './support/spec_helper'
 validators = require '../index'
 fixtures   = require './fixtures/patterns'
 
-shouldBehaveLikeAValidator = (validatorFn, defaultErrorMessage, fixtures) ->
+shouldBehaveLikeAnAsyncValidator = (validatorFn, defaultErrorMessage, fixtures) ->
   describe 'valid', ->
     for validCase in fixtures.valid
       ((testCase)->
@@ -31,5 +31,22 @@ shouldBehaveLikeAValidator = (validatorFn, defaultErrorMessage, fixtures) ->
             done()
       )(invalidCase)
 
-describe '#urls',   -> shouldBehaveLikeAValidator(validators.pattern.url, "Invalid Url specified", fixtures.urls)
-describe '#emails', -> shouldBehaveLikeAValidator(validators.pattern.email, "Invalid Email specified", fixtures.emails)
+
+shouldBehaveLikeASyncValidator = (validatorFn, defaultErrorMessage, fixtures) ->
+  describe 'valid', ->
+    for validCase in fixtures.valid
+      do (validCase) ->
+        it "should allow #{validCase}", ->
+          validatorFn(validCase).should.be.true
+
+
+  describe 'invalid', ->
+    for invalidCase in fixtures.invalid
+      do (invalidCase) ->
+        it "should not allow #{invalidCase}", ->
+          validatorFn(invalidCase).should.be.false
+
+describe '#urls',      -> shouldBehaveLikeAnAsyncValidator(validators.pattern.url,     "Invalid Url specified", fixtures.urls)
+describe '#urlSync',   -> shouldBehaveLikeASyncValidator(validators.pattern.urlSync,   "Invalid Url specified", fixtures.urls)
+describe '#emails',    -> shouldBehaveLikeAnAsyncValidator(validators.pattern.email,   "Invalid Email specified", fixtures.emails)
+describe '#emailSync', -> shouldBehaveLikeASyncValidator(validators.pattern.emailSync, "Invalid Email specified", fixtures.emails)

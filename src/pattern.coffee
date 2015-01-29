@@ -1,13 +1,19 @@
 match = (regex, val, msg, cb) ->
-  return cb() if regex.test val
-  cb msg
+  if regex.test val
+    return cb?() or true
+  cb?(msg) or false
 
-module.exports = 
-  email: (msg) ->
+module.exports = v =
+  emailSync: (email) ->
     regex = /^"?[A-Z0-9_%+-]+\.?[A-Z0-9_%+-]*"?[^\.]@\[?([^-_]([A-Z-_]+\.[A-Z]+)+|[0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]{3})\]?$/i
-    (email, cb) -> match(regex, email, (msg or "Invalid Email specified"), cb)
+    match regex, email
 
-  url: (msg) ->
+  email: (msg = "Invalid Email specified") ->
+    (email, cb) ->
+      return cb(msg) unless v.emailSync(email)
+      cb()
+
+  urlSync: (url) ->
     # https://gist.github.com/dperini/729294
     regex = new RegExp(
       "^" +
@@ -45,4 +51,9 @@ module.exports =
         "(?:/[^\\s]*)?" +
       "$", "i"
     )
-    (url, cb) -> match(regex, url, (msg or "Invalid Url specified"), cb)
+    match regex, url
+
+  url: (msg = "Invalid Url specified") ->
+    (url, cb) ->
+      return cb(msg) unless v.urlSync(url)
+      cb()
