@@ -1,7 +1,7 @@
-should = require 'should'
-helper = require './support/spec_helper'
+should     = require 'should'
+helper     = require './support/spec_helper'
 validators = require '../index'
-urls = require './fixtures/patterns/urls'
+urls       = require './fixtures/patterns/urls'
 
 describe 'ORM2 Integration', ->
   describe '#urls', ->
