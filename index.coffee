@@ -1,2 +1,1 @@
-module.exports = 
-  pattern: require './src/pattern'
+module.exports = require('./src/validators')
