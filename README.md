@@ -11,6 +11,11 @@ Validators
  - URL
  - Email
 
+Install
+=======
+
+`npm install validatormator`
+
 License
 =======
 
