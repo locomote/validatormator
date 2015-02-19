@@ -50,6 +50,7 @@
     "http://##",
     "http://##/",
     "http://foo.bar?q=Spaces should be encoded",
+    "http://actuallyacommonerroristoforgetthetld",
     "//",
     "//a",
     "///a",

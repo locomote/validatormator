@@ -14,27 +14,47 @@ module.exports = v =
       cb()
 
   urlSync: (url, opts = {}) ->
-    privateAndLocalNetworks = ->
-      return '' if opts.allowPrivateNetworks
+
+    excludePrivateAndLocalNetworks =
       # IP address exclusion
       # private & local networks
-      "(?!10(?:\\.\\d{1,3}){3})" +
-      "(?!127(?:\\.\\d{1,3}){3})" +
-      "(?!169\\.254(?:\\.\\d{1,3}){2})" +
-      "(?!192\\.168(?:\\.\\d{1,3}){2})" +
-      "(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})"
+      "10(?:\\.\\d{1,3}){3}" +
+      "|127(?:\\.\\d{1,3}){3}" +
+      "|169\\.254(?:\\.\\d{1,3}){2}" +
+      "|192\\.168(?:\\.\\d{1,3}){2}" +
+      "|172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2}"
+
+    commonPrefix =
+      "^" +
+      # protocol identifier
+      "(?:(?:https?|ftp)://)" +
+      # user:pass authentication
+      "(?:\\S+(?::\\S*)?@)?"
+
+    commonSuffix =
+      # port number
+      "(?::\\d{2,5})?" +
+      # resource path
+      "(?:/[^\\s]*)?" +
+      "$"
+
+    # noting that a common error is to submit the address without the TLD,
+    # this allows us to reject such malformed data that could have us backtracking for hours
+    # no, seriously: hours. https://code.google.com/p/v8/issues/detail?id=2254
+    prelimREstr =
+        # ignore lower-order domain segments ....
+        "(?:.*)\\." +
+        # ..... and just try to match the last segment:
+        "(?:" +
+          # last IP address dotted notation octet, ...
+          "(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4])" +
+          "|" +
+          #  ... or the TLD identifier
+          "(?:[a-z\\u00a1-\\uffff]{2,10})" + # are there tlds more than 10 chars long?
+        ")"
 
     # https://gist.github.com/dperini/729294
-    regexStr =
-      "^" +
-        # protocol identifier
-        "(?:(?:https?|ftp)://)" +
-        # user:pass authentication
-        "(?:\\S+(?::\\S*)?@)?" +
-        "(?:" +
-
-          privateAndLocalNetworks() +
-
+    regexStr = "(?:" +
           # IP address dotted notation octets
           # excludes loopback network 0.0.0.0
           # excludes reserved space >= 224.0.0.0
@@ -50,16 +70,15 @@ module.exports = v =
           "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*" +
           # TLD identifier
           "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))" +
-        ")" +
-        # port number
-        "(?::\\d{2,5})?" +
-        # resource path
-        "(?:/[^\\s]*)?" +
-      "$"
+        ")"
 
-    match new RegExp(regexStr, "i"), url
+    return false unless match new RegExp(commonPrefix + prelimREstr + commonSuffix, "i"), url
+    return false unless match new RegExp(commonPrefix + regexStr + commonSuffix, "i"), url
+    return true if opts.allowPrivateNetworks
+    not match new RegExp( commonPrefix + excludePrivateAndLocalNetworks + commonSuffix, "i" ), url
 
   url: (msg = "Invalid Url specified", opts) ->
     (url, cb) ->
       return cb(msg) unless v.urlSync(url, opts)
       cb()
+
