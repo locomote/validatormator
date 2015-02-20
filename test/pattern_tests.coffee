@@ -38,7 +38,7 @@ shouldBehaveLikeASyncValidator = (validatorFn, defaultErrorMessage, fixtures) ->
     for validCase in fixtures.valid
       do (validCase) ->
         it "should allow #{validCase}", ->
-          validatorFn(validCase).should.not.be.false
+          validatorFn(validCase).should.be.true
 
   describe 'invalid', ->
     for invalidCase in fixtures.invalid
