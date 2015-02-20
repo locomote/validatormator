@@ -33,18 +33,19 @@ shouldBehaveLikeAnAsyncValidator = (validatorFn, defaultErrorMessage, fixtures) 
 
 
 shouldBehaveLikeASyncValidator = (validatorFn, defaultErrorMessage, fixtures) ->
+
   describe 'valid', ->
     for validCase in fixtures.valid
       do (validCase) ->
         it "should allow #{validCase}", ->
           validatorFn(validCase).should.be.true
 
-
   describe 'invalid', ->
     for invalidCase in fixtures.invalid
       do (invalidCase) ->
         it "should not allow #{invalidCase}", ->
           validatorFn(invalidCase).should.be.false
+
 
 describe '#urls',      -> shouldBehaveLikeAnAsyncValidator(validators.pattern.url,     "Invalid Url specified", fixtures.urls)
 describe '#urlSync',   -> shouldBehaveLikeASyncValidator(validators.pattern.urlSync,   "Invalid Url specified", fixtures.urls)
@@ -62,5 +63,5 @@ describe '#urlSync opts', ->
           validators.pattern.urlSync(validCase).should.be.false
 
 
-# describe '#emails',    -> shouldBehaveLikeAnAsyncValidator(validators.pattern.email,   "Invalid Email specified", fixtures.emails)
-# describe '#emailSync', -> shouldBehaveLikeASyncValidator(validators.pattern.emailSync, "Invalid Email specified", fixtures.emails)
+describe '#emails',    -> shouldBehaveLikeAnAsyncValidator(validators.pattern.email,   "Invalid Email specified", fixtures.emails)
+describe '#emailSync', -> shouldBehaveLikeASyncValidator(validators.pattern.emailSync, "Invalid Email specified", fixtures.emails)
