@@ -82,9 +82,9 @@
   ],
 
   "localFiles": [
-    "//somefile.txt",
-    "//path/somefile.ext",
-    "//full/directory/structure/file.htm"
+    "\\\\somefile.txt",
+    "\\\\path\\somefile.ext",
+    "\\\\full\\directory\\structure\\file.htm"
   ],
 
   "privateNetworks": [
