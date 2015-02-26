@@ -81,6 +81,12 @@
     "http://10.1.1.254"
   ],
 
+  "localFiles": [
+    "\\\\somefile.txt",
+    "\\\\path\\somefile.ext",
+    "\\\\full\\directory\\structure\\file.htm"
+  ],
+
   "privateNetworks": [
     "http://10.103.222.50",
     "http://127.103.222.50",
@@ -89,3 +95,4 @@
     "http://172.16.222.50"
   ]
 }
+

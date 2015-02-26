@@ -62,6 +62,18 @@ describe '#urlSync opts', ->
         it "should not allow #{validCase}", ->
           validators.pattern.urlSync(validCase).should.be.false
 
+  describe 'allowLocalFiles is true', ->
+    for validCase in fixtures.urls.localFiles
+      do (validCase) ->
+        it "should allow #{validCase}", ->
+          validators.pattern.urlSync(validCase, allowLocalFiles: true).should.be.true
+
+  describe 'allowLocalFiles is false', ->
+    for validCase in fixtures.urls.localFiles
+      do (validCase) ->
+        it "should not allow #{validCase}", ->
+          validators.pattern.urlSync(validCase).should.be.false
+
 
 describe '#emails',    -> shouldBehaveLikeAnAsyncValidator(validators.pattern.email,   "Invalid Email specified", fixtures.emails)
 describe '#emailSync', -> shouldBehaveLikeASyncValidator(validators.pattern.emailSync, "Invalid Email specified", fixtures.emails)
