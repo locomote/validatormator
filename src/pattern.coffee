@@ -24,19 +24,26 @@ module.exports = v =
       "|192\\.168(?:\\.\\d{1,3}){2}" +
       "|172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2}"
 
-    commonPrefix =
+    PRE =
       "^" +
       # protocol identifier
       "(?:(?:https?|ftp)://)" +
       # user:pass authentication
       "(?:\\S+(?::\\S*)?@)?"
 
-    commonSuffix =
+    POST =
       # port number
       "(?::\\d{2,5})?" +
       # resource path
       "(?:/[^\\s]*)?" +
       "$"
+
+    localStr =
+      "(?:\\\\)" +
+      # one or more paths
+      "(?:\\\\[^\\s]*)+" +
+      # optional filename extension
+      "(?:\\.[^\\s]*)?$"
 
     # noting that a common error is to submit the address without the TLD,
     # this allows us to reject such malformed data that could have us backtracking for hours
@@ -72,10 +79,14 @@ module.exports = v =
           "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))" +
         ")"
 
-    return false unless match new RegExp(commonPrefix + prelimREstr + commonSuffix, "i"), url
-    return false unless match new RegExp(commonPrefix + regexStr + commonSuffix, "i"), url
+    if opts.allowLocalFiles
+      if match new RegExp(localStr, "i"), url
+       return true
+
+    return false unless match new RegExp(PRE + prelimREstr + POST, "i"), url
+    return false unless match new RegExp(PRE + regexStr + POST, "i"), url
     return true if opts.allowPrivateNetworks
-    not match new RegExp( commonPrefix + excludePrivateAndLocalNetworks + commonSuffix, "i" ), url
+    not match new RegExp( PRE + excludePrivateAndLocalNetworks + POST, "i" ), url
 
   url: (msg = "Invalid Url specified", opts) ->
     (url, cb) ->
