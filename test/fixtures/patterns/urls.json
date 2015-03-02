@@ -87,6 +87,11 @@
     "\\\\full\\directory\\structure\\file.htm"
   ],
 
+  "localFilesInvalid": [
+    "http:\\\\somefile.txt",
+    "https:\\\\full\\directory\\structure\\file.htm"
+  ],
+
   "privateNetworks": [
     "http://10.103.222.50",
     "http://127.103.222.50",
