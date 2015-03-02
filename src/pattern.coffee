@@ -40,7 +40,7 @@ module.exports = v =
       "$"
 
     localStr =
-      "(?:\\\\)" +
+      "^(?:\\\\)" +
       # one or more paths
       "(?:\\\\[^\\s]*)+" +
       # optional filename extension

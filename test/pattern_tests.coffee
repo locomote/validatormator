@@ -68,6 +68,11 @@ describe '#urlSync opts', ->
         it "should allow #{validCase}", ->
           validators.pattern.urlSync(validCase, allowLocalFiles: true).should.be.true
 
+    for invalidCase in fixtures.urls.localFilesInvalid
+      do (invalidCase) ->
+        it "should not allow #{invalidCase}", ->
+          validators.pattern.urlSync(invalidCase, allowLocalFiles: true).should.be.false
+
   describe 'allowLocalFiles is false', ->
     for validCase in fixtures.urls.localFiles
       do (validCase) ->
