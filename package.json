@@ -1,6 +1,6 @@
 {
   "name": "validatormator",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A collection of validators for general use, or with Node-ORM2",
   "homepage": "http://thecodeabode.blogspot.com",
   "author": {
