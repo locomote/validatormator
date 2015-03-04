@@ -40,11 +40,18 @@ module.exports = v =
       "$"
 
     localStr =
-      "^(?:\\\\)" +
+      "^((?:" +
+      "(?:\\\\)" +
       # one or more paths
-      "(?:\\\\[^\\s]*)+" +
+      "(?:\\\\[^\\s\\\\/]+)+" +
       # optional filename extension
-      "(?:\\.[^\\s]*)?$"
+      "(?:\\.[^\\s\\\\/]*)?" +
+      ")|(?:" +
+      "file:////" +
+      # one or more paths
+      "(?:/[^\\s\\\\/]+)+" +
+      # optional filename extension
+      "))(?:\\.[^\\s\\\\/]*)?$"
 
     # noting that a common error is to submit the address without the TLD,
     # this allows us to reject such malformed data that could have us backtracking for hours

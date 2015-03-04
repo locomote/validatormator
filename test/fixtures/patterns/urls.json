@@ -84,10 +84,16 @@
   "localFiles": [
     "\\\\somefile.txt",
     "\\\\path\\somefile.ext",
-    "\\\\full\\directory\\structure\\file.htm"
+    "\\\\full\\directory\\structure\\file.htm",
+    "file://///path/file.txt"
   ],
 
   "localFilesInvalid": [
+    "\\\\\\path\\somefile.txt",
+    "\\\\path/somefile.txt",
+    "\\\\path\\\\somefile.ext",
+    "file://///path\\file.txt",
+    "file:///path/file.txt",
     "http:\\\\somefile.txt",
     "https:\\\\full\\directory\\structure\\file.htm"
   ],
