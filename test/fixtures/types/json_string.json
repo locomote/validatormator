@@ -1,0 +1,13 @@
+{
+  "valid": [
+    "{\"keyOne\": \"Value\"}",
+    "{\"keyOne\": [\"Value\"]}",
+    "{\"keyOne\": 1}",
+    102
+  ],
+
+  "invalid": [
+    "Value",
+    "{ this is malformed"
+  ]
+}
