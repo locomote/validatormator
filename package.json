@@ -1,6 +1,6 @@
 {
   "name": "validatormator",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "A collection of validators for general use, or with Node-ORM2",
   "homepage": "http://thecodeabode.blogspot.com",
   "author": {
@@ -19,9 +19,10 @@
   },
   "dependencies": {
     "coffee-script": "1.7.1",
-    "orm": "~2.0.13"
+    "jsonschema": "1.0.0"
   },
   "devDependencies": {
+    "orm": "~2.0.13",
     "mocha": "*",
     "async": "*",
     "should": "*",
