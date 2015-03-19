@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "coffee-script": "1.7.1",
-    "jsonschema": "git+ssh://git@github.com:benkitzelman/jsonschema.git"
+    "jsonschema": "git+ssh://git@github.com:benkitzelman/jsonschema.git#ie8-fixes"
   },
   "devDependencies": {
     "orm": "~2.0.13",
