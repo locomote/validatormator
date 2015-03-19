@@ -1,10 +1,10 @@
-schema = require 'jsonschema'
-
 
 adheresToSchemas = (obj, theSchemas = []) ->
   return true unless theSchemas.length and theSchemas.forEach?
 
-  validator = new schema.Validator
+  JsonSchema = require 'jsonschema'
+  validator  = new JsonSchema.Validator
+
   for aSchema, idx in theSchemas
 
     # parse the schema if necessary
