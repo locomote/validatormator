@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "coffee-script": "1.7.1",
-    "jsonschema": "1.0.0"
+    "jsonschema": "git+ssh://git@github.com:benkitzelman/jsonschema.git"
   },
   "devDependencies": {
     "orm": "~2.0.13",
