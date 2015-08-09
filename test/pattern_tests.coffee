@@ -2,7 +2,7 @@ should = require 'should'
 helper = require './support/spec_helper'
 AsyncTests = require './support/async_assertion'
 SyncTests  = require './support/sync_assertion'
-validators = require '../index'
+validators = require '../index.coffee'
 fixtures   = require './fixtures/patterns'
 
 describe '#urls',      -> AsyncTests(validators.pattern.url,     "Invalid Url specified", fixtures.urls)

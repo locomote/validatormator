@@ -1,6 +1,6 @@
 should     = require 'should'
 helper     = require './support/spec_helper'
-validators = require '../index'
+validators = require '../index.coffee'
 urls       = require './fixtures/patterns/urls'
 
 describe 'ORM2 Integration', ->
