@@ -5,7 +5,7 @@ match = (regex, val, msg, cb) ->
 
 module.exports = v =
   emailSync: (email) ->
-    regex = /^"?[A-Z0-9_%+-]+\.?[A-Z0-9_%+-]*"?[^\.]@\[?([^-_]([A-Z-_]+\.[A-Z]+)+|[0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]{3})\]?$/i
+    regex = /^"?['A-Z0-9_%+-]+\.?[A-Z0-9_%+-]*"?[^\.]@\[?([^-_]([A-Z-_]+\.[A-Z]+)+|[0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]{3})\]?$/i
     match regex, email
 
   email: (msg = "Invalid Email specified") ->

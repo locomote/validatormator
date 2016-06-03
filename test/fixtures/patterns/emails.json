@@ -13,7 +13,8 @@
     "email@example.name",
     "email@example.museum",
     "email@example.co.jp",
-    "firstname-lastname@example.com"
+    "firstname-lastname@example.com",
+    "a'postr'ophe@somewhere.com"
   ],
   "invalid": [
     "plainaddress",
