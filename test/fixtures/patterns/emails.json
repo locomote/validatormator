@@ -9,12 +9,18 @@
     "\"email\"@example.com",
     "1234567890@example.com",
     "email@example-one.com",
+    "email@example",
     "_______@example.com",
+    "email@-example.com",
     "email@example.name",
     "email@example.museum",
     "email@example.co.jp",
+    "email@12345example.com",
+    "email@12345sub.67890example.com",
+    "email@111.222.333.44444",
     "firstname-lastname@example.com",
-    "a'postr'ophe@somewhere.com"
+    "a'postr'ophe@somewhere.com",
+    "あいうえお@example.com"
   ],
   "invalid": [
     "plainaddress",
@@ -26,11 +32,7 @@
     ".email@example.com",
     "email.@example.com",
     "email..email@example.com",
-    "あいうえお@example.com",
     "email@example.com (Joe Smith)",
-    "email@example",
-    "email@-example.com",
-    "email@111.222.333.44444",
     "email@example..com",
     "Abc..123@example.com"
   ]
