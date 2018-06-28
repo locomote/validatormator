@@ -10,8 +10,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "test"  : "npm run prepublish && mocha",
-    "prepublish" : "coffee -c -o lib src/*.coffee"
+    "coverage": "mocha --reporter html-cov > coverage.html && rm -rf coverage/ && open coverage.html",
+    "test": "npm run prepublish && mocha && npm run coverage",
+    "prepublish": "coffee -c -o lib src/*.coffee"
   },
   "repository": {
     "type": "git",
@@ -22,10 +23,14 @@
     "jsonschema": "git+ssh://git@github.com:benkitzelman/jsonschema.git#ie8-fixes"
   },
   "devDependencies": {
-    "orm": "~2.0.13",
-    "mocha": "*",
     "async": "*",
+    "coffee-coverage": "^0.6.2",
+    "coffee-script": "^1.9.3",
+    "istanbul": "^0.3.17",
+    "mocha": "*",
+    "mocha-lcov-reporter": "0.0.2",
+    "orm": "~2.0.13",
     "should": "*",
-    "sqlite3": "2.1.7"
+    "sqlite3": "3.0.8"
   }
 }
