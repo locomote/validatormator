@@ -19,7 +19,8 @@
     "url": "git://github.com/benkitzelman/validatormator.git"
   },
   "dependencies": {
-    "jsonschema": "1.0.0"
+    "coffee-script": "1.7.1",
+    "jsonschema": "git+ssh://git@github.com:benkitzelman/jsonschema.git#ie8-fixes"
   },
   "devDependencies": {
     "async": "*",
